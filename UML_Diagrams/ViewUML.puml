@@ -1,0 +1,20 @@
+@startuml
+class GUI {
+    - JButton[] playerCards
+    - JLabel[] positions
+    - JLayeredPane basic_panel
+    - JLayeredPane player1
+    - JLabel pawn
+    - JTextArea infobox
+    - ClassLoader cldr
+    - boolean enabled
+
+    + GUI()
+    + void updateCard(Card c ,int position)
+    + void updatePawn(int position)
+    + void updateInfobox(String message)
+    + void initCards(ArrayList<Card> cards)
+    + void initComponents(ArrayList<Card> cards)
+    + void showWinningMessage(String message)
+}
+@enduml

@@ -1,0 +1,130 @@
+
+plantuml_code =
+@startuml
+skinparam dpi 300
+
+class Card {
+    - String palace
+    + String getPalace()
+    + boolean isPlayable(Card previousCard)
+}
+
+class NumberCard {
+    - int value
+    + int getValue()
+}
+
+class AriadneCard {
+    - int steps
+    + int getSteps()
+}
+
+class MinotaurCard {
+    - int damage
+    + void attack(Player player, Path path)
+}
+
+class Player {
+    - String name
+    - List<Card> cards
+    - List<Pawn> pawns
+    - int score
+    - List<Finding> findings
+    + void addScore(int score, int points)
+    + Card playCard(Card card, Path path)
+    + Card drawCard(Deck deck)
+    + boolean hasAvailablePawn(Path path)
+}
+
+class Pawn {
+    - boolean isHidden
+    - int currentPosition
+    - Path currentPath
+    + void move(int steps)
+    + boolean isHidden()
+    + void reveal()
+}
+
+class Archaeologist {
+    + Finding openBox(FindingPosition)
+}
+
+class Theseus {
+    - int remainingDestroys
+    + boolean destroyBox(FindingPosition)
+}
+
+class Path {
+    - String palace
+    - List<Position> positions
+    - boolean pathCompleted
+    + Position getNextPosition(Pawn pawn)
+    + boolean isCompleted()
+}
+
+class Position {
+    - int index
+    - int score
+    + int getScore()
+}
+
+class FindingPosition {
+    - Finding finding
+    + Finding revealFinding()
+}
+
+class Finding {
+    - String name
+    - int value
+    + String getName()
+    + int getValue()
+}
+
+class RareFinding {}
+
+class Fresco {
+    - boolean photographed
+    + boolean isPhotographed()
+}
+
+class SnakeGoddess {}
+
+class Board {
+    - List<Path> paths
+    - Deck deck
+    - Map<String, RareFinding> rareFindings
+    + void initializeBoard()
+    + Path getPath(String palace)
+    + void addFindingsToPaths()
+}
+
+class Deck {
+    - List<Card> cards
+    - Stack<Card> discards
+    + void shuffle()
+    + Card draw()
+    + void discard(Card card)
+    + int getRemainingCards()
+}
+
+Card <|-- NumberCard
+Card <|-- AriadneCard
+Card <|-- MinotaurCard
+
+Pawn <|-- Archaeologist
+Pawn <|-- Theseus
+
+Position <|-- FindingPosition
+
+Finding <|-- RareFinding
+Finding <|-- Fresco
+Finding <|-- SnakeGoddess
+
+Board --> Path : paths
+Board --> Deck : deck
+Board --> Finding : rareFindings
+
+Player --> Pawn : pawns
+Path --> Position : positions
+FindingPosition --> Finding : finding
+@enduml

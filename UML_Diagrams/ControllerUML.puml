@@ -1,0 +1,25 @@
+
+plantuml_code =
+@startuml
+skinparam dpi 300
+class Controller {
+    - Board board
+    - Player player1
+    - Player player2
+    - Random random
+    - Player currentPlayer
+
+    + Controller(Board board, Player player1, Player player2)
+    + void setupBoard()
+    + void randomStart()
+    + Player getCurrentPlayer()
+    + void turn()
+    + boolean validMove(Pawn pawn, Card card)
+    + void nextTurn()
+    + void Winner()
+    + boolean isGameOver()
+    + void movePawn(Pawn pawn, int steps)
+    + void playCard(Pawn pawn, Card card)
+    + int countScore(int points)
+}
+@enduml
